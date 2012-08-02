@@ -6,6 +6,8 @@ The idea behind this implementation is to create a DSL simple to use, more orien
 
 ##Using the CSharpDriver for Mongo
 
+* Code:
+
 	```csharp
 	//Connection
 	var connectionString = "mongodb://localhost/?safe=true";
@@ -26,7 +28,9 @@ The idea behind this implementation is to create a DSL simple to use, more orien
 
 
 ##Using DMongo
-	
+
+*Code:
+		
 	```csharp
 	//Instance
 	var mongo = new Mongo("mongo://localhost/?safe=true");

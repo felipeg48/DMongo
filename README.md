@@ -4,14 +4,14 @@ This is an wrapper of the CSharpDriver for Mongo, using the Microsoft Dynamic sy
 
 The idea behind this implementation is to create a DSL simple to use, more oriented to the Mongo Shell commands.
 
-* Using the CSharpDriver for Mongo
+##Using the CSharpDriver for Mongo
 
 	```csharp
 	//Connection
 	var connectionString = "mongodb://localhost/?safe=true";
 	var server = MongoServer.Create(connectionString);
     var database = server.GetDatabase("test");
-    var collection = database.GetCollection<Entity>("entities");
+    var collection = database.GetCollection<Entity>("mycollection");
     
     //Insert:
     var entity = new Entity { Name = "Tom" };
@@ -25,7 +25,7 @@ The idea behind this implementation is to create a DSL simple to use, more orien
     ```
 
 
-* Using DMongo
+##Using DMongo
 	
 	```csharp
 	//Instance
@@ -33,7 +33,11 @@ The idea behind this implementation is to create a DSL simple to use, more orien
 	var db = mongo.GetDatabase("test");	
 	
 	//Actions
+	var entity = db.mycollection.insert(new {name = "John" });
 	var result = db.mycollection.findOne(new { name = "John" });
+	Console.WriteLine("Result: {0}", result.name);
 	```
+
+
 
 [My Blog](http://felipeg48.blogspot.com)

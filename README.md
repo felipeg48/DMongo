@@ -7,13 +7,18 @@ The idea behind this implementation is to create a DSL simple to use, more orien
 * Using the CSharpDriver for Mongo
 
 	```csharp
+	//Connection
 	var connectionString = "mongodb://localhost/?safe=true";
 	var server = MongoServer.Create(connectionString);
     var database = server.GetDatabase("test");
     var collection = database.GetCollection<Entity>("entities");
+    
+    //Insert:
     var entity = new Entity { Name = "Tom" };
     collection.Insert(entity);
     var id = entity.Id;
+    
+    //Query:
     var query = Query.EQ("_id", id);
     entity = collection.FindOne(query);
     Console.WriteLine("Result: {0}",entity.Name);
@@ -23,8 +28,11 @@ The idea behind this implementation is to create a DSL simple to use, more orien
 * Using DMongo
 	
 	```csharp
+	//Instance
 	var mongo = new Mongo("mongo://localhost/?safe=true");
 	var db = mongo.GetDatabase("test");	
+	
+	//Actions
 	var result = db.mycollection.findOne(new { name = "John" });
 	```
 

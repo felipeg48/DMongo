@@ -49,4 +49,9 @@ This example was taken from: [CSharp Driver Quick Start](http://www.mongodb.org/
 5. More and more...
 
 
+### Notes:
+
+This project is being develop on Mono for Mac using the CSharpDriver Libraries, NUnit and Mono implementation of the C# language.
+I haven't tested it yet on a windows environment, but this inital commit should work.
+
 [My Blog](http://felipeg48.blogspot.com)

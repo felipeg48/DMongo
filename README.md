@@ -1,4 +1,4 @@
-# DMongo - Dynamic Mongo a wrapper for the CSharp Mongo Driver
+# DMongo - Dynamic wrapper for the CSharp Mongo Driver
 
 This is an wrapper of the CSharpDriver for Mongo, using the Microsoft Dynamic syntax.
 
@@ -40,6 +40,13 @@ This example was taken from: [CSharp Driver Quick Start](http://www.mongodb.org/
 	Console.WriteLine("Result: {0}", result.name);
 	```
 
+### Features:
+
+1. Dynamic Collections (work in progress)
+2. DB Actions - Update, Insert, Delete (work in progress)
+3. DB Query - all Finders and Linq (not done)
+4. Multithread - (not done)
+5. More and more...
 
 
 [My Blog](http://felipeg48.blogspot.com)

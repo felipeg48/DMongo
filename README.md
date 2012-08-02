@@ -4,9 +4,9 @@ This is an wrapper of the CSharpDriver for Mongo, using the Microsoft Dynamic sy
 
 The idea behind this implementation is to create a DSL simple to use, more oriented to the Mongo Shell commands.
 
-Examples:
+* Using the CSharpDriver for Mongo
 
-	//Using the CSharpDriver for Mongo
+	```csharp
 	var connectionString = "mongodb://localhost/?safe=true";
 	var server = MongoServer.Create(connectionString);
     var database = server.GetDatabase("test");
@@ -17,11 +17,15 @@ Examples:
     var query = Query.EQ("_id", id);
     entity = collection.FindOne(query);
     Console.WriteLine("Result: {0}",entity.Name);
+    ```
 
-	//Using DMongo
+
+* Using DMongo
+	
+	```csharp
 	var mongo = new Mongo("mongo://localhost/?safe=true");
 	var db = mongo.GetDatabase("test");	
 	var result = db.mycollection.findOne(new { name = "John" });
-	
+	```
 
 [My Blog](http://felipeg48.blogspot.com)

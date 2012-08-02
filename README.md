@@ -4,9 +4,10 @@ This is an wrapper of the CSharpDriver for Mongo, using the Microsoft Dynamic sy
 
 The idea behind this implementation is to create a DSL simple to use, more oriented to the Mongo Shell commands.
 
-##Using the CSharpDriver for Mongo
+##Using the CSharpDriver for Mongo##
 
 This example was taken from: [CSharp Driver Quick Start](http://www.mongodb.org/display/DOCS/CSharp+Driver+Quickstart)
+
 
 	```csharp
 	//Connection
@@ -27,9 +28,10 @@ This example was taken from: [CSharp Driver Quick Start](http://www.mongodb.org/
     ```
 
 
-##Using DMongo
+##Using DMongo##
 
 A simple way to use the collections (like the mongo shell)
+
 		
 	```csharp
 	//Instance

@@ -6,7 +6,7 @@ The idea behind this implementation is to create a DSL simple to use, more orien
 
 ##Using the CSharpDriver for Mongo
 
-* Code:
+This example was taken from: [CSharp Driver Quick Start](http://www.mongodb.org/display/DOCS/CSharp+Driver+Quickstart)
 
 	```csharp
 	//Connection
@@ -29,7 +29,7 @@ The idea behind this implementation is to create a DSL simple to use, more orien
 
 ##Using DMongo
 
-*Code:
+A simple way to use the collections (like the mongo shell)
 		
 	```csharp
 	//Instance

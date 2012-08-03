@@ -25,7 +25,7 @@ The idea behind this implementation is to create a DSL simple to use, more orien
     ```
 
 This example was taken from: [CSharp Driver Quick Start](http://www.mongodb.org/display/DOCS/CSharp+Driver+Quickstart)
-There is a Test case based on the example above. On that I'm using a Facade and a help model.
+There is a Test case based on the example above. 
 
 * Using DMongo: A simple way to use the collections (like the mongo shell)
 		

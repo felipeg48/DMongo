@@ -1,9 +1,12 @@
 using System;
 using MongoDB.Bson;
 
-namespace DMongo.CSharpDriver
+namespace DMongo.Test
 {
-	public class CSharpDriverModel
+	/// <summary>
+	/// Simple entity.
+	/// </summary>
+	public class SimpleEntity
 	{
 		public ObjectId Id { get; set; }
         public string Name { get; set; }

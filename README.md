@@ -25,7 +25,7 @@ The idea behind this implementation is to create a DSL simple to use, more orien
     ```
 
 This example was taken from: [CSharp Driver Quick Start](http://www.mongodb.org/display/DOCS/CSharp+Driver+Quickstart)
-
+There is a Test case based on the example above. On that I'm using a Facade and a help model.
 
 * Using DMongo: A simple way to use the collections (like the mongo shell)
 		
@@ -43,15 +43,18 @@ This example was taken from: [CSharp Driver Quick Start](http://www.mongodb.org/
 ### Features:
 
 1. Dynamic Collections (work in progress)
-2. DB Actions - Update, Insert, Delete (work in progress)
-3. DB Query - all Finders and Linq (not done)
-4. Multithread - (not done)
-5. More and more...
+2. Data Types (work in progress). Note: For now only annonymous types are accepted.
+3. DB Actions - Update, Insert, Delete (work in progress)
+4. DB Query - all Finders and Linq (not done)
+5. Extra functionallity from the CSharp Driver (not done)
+6. Multithread - (not done)
+7. More and more...
 
 
 ### Notes:
 
 This project is being develop on Mono for Mac using the CSharpDriver Libraries, NUnit and Mono implementation of the C# language.
 I haven't tested it yet on a windows environment, but this inital commit should work.
+I used the .NET Framework 4.0
 
 [My Blog](http://felipeg48.blogspot.com)

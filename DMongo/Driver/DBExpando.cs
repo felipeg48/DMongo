@@ -53,19 +53,69 @@ namespace DMongo.Driver
 
 	sealed class DBAction
 	{
-		public object find(MongoCollection collection,object[] args)
+		public dynamic find(MongoCollection collection,object[] args)
 		{
 			Type type = args[0].GetType();
-			PropertyInfo[] properties = type.GetProperties();
-			Dictionary<string,object> dictionary = new Dictionary<string, object>();
-			foreach(var property in properties)
-				dictionary[property.Name] = property.GetValue(args[0],null);
 
-			var query = new QueryDocument(dictionary);
-			var result = collection.FindAs<BsonDocument>(query); 
-			return result;
+			if(type.Name.Contains("<>__AnonType")){
+
+				PropertyInfo[] properties = type.GetProperties();
+				Dictionary<string,object> dictionary = new Dictionary<string, object>();
+				foreach(var property in properties)
+					dictionary[property.Name] = property.GetValue(args[0],null);
+
+				var query = new QueryDocument(dictionary);
+				var result = collection.FindAs<BsonDocument>(query); 
+				List<Entity> documents = new List<Entity>();
+
+				if(result.Size() > 0)
+				{
+					foreach(var entity in result)
+						documents.Add(new Entity(entity));
+				}
+
+				return documents;
+			}
+			throw new NotImplementedException("Only annonymous types are accepted for Queries.");
 		}
 
+		public void insert(MongoCollection collection, object[] args)
+		{
+			collection.Insert(args[0]);				
+		}
+	}
+
+	sealed class Entity : DynamicObject
+	{
+		private Dictionary<string, object> properties = new Dictionary<string, object>();
+		public Entity(BsonDocument document) 
+		{
+			dynamic value;
+			foreach(var property in document.Names)
+			{
+				if(document[property].IsString)
+					value = document[property].AsString;
+				else if(document[property].IsBoolean)
+					value = document.IsBoolean;
+				else if (document[property].IsBsonNull)
+					value = null;
+				else
+					value = null;
+
+				properties.Add(property,value);
+			}
+		}
+
+		public override bool TryGetMember(GetMemberBinder binder, out object result)
+	    {	
+	        return properties.TryGetValue(binder.Name, out result);
+	    }
+			    
+	    public override bool TrySetMember(SetMemberBinder binder, object value)
+	    {	        
+	        properties[binder.Name] = value;
+	        return true;
+	    }
 	}
 }
 

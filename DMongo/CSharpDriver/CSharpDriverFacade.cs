@@ -6,6 +6,9 @@ using MongoDB.Driver.Builders;
 
 namespace DMongo.CSharpDriver
 {
+	/// <summary>
+	/// C sharp driver facade.
+	/// </summary>
 	public class CSharpDriverFacade
 	{
 

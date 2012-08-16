@@ -2,6 +2,8 @@ using System;
 using System.Dynamic;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Text.RegularExpressions;
+using System.Linq;
 
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -35,19 +37,61 @@ namespace DMongo.Driver
 		private MongoCollection _collection;
 		private Dictionary<string, Type> action = new Dictionary<string, Type>();
 		private DBAction dbaction = new DBAction();
+
 		public CollectionExpando(MongoCollection collection)
 		{
 			this._collection = collection;
-
 		}
 
 		public override bool TryInvokeMember(InvokeMemberBinder binder, object[] args, out object result)
 	    {
-			if(!action.ContainsKey(binder.Name.ToLower()))
-				action.Add(binder.Name,typeof(DBAction));
-			var newargs = new object[] { _collection, args};
-			result = action[binder.Name].InvokeMember(binder.Name,System.Reflection.BindingFlags.InvokeMethod,null,dbaction,newargs);
-			return true;
+			try{
+				if(Regex.Match(binder.Name[0].ToString(), @"[A-Z]").Success)
+				{
+					MethodInfo method = null;
+					var types = this._collection.GetType().GetMethods();
+					var ms = from m in types where m.Name == binder.Name select m;
+
+					if(ms.Any()){
+						//It should be a better way to indenfity the Generic with Non-Gereric Methods
+						foreach(MethodInfo m in ms)
+						{
+							if(null!=args && args.Length > 0 && m.GetParameters().Length > 0)
+							{
+								method = m.MakeGenericMethod(typeof(BsonDocument));
+								result = method.Invoke(this._collection,args);
+								return true;
+							}
+							else
+							{
+								method = m.MakeGenericMethod(typeof(BsonDocument));
+								result = method.Invoke(this._collection,null);
+								return true;
+							}
+						}
+					}
+					else
+					{
+						throw new Exception(string.Format("There is no method with the name {0} on the instanced object.",binder.Name));
+					}
+				}
+				else
+				{
+					if(!action.ContainsKey(binder.Name))
+						action.Add(binder.Name,typeof(DBAction));
+
+					var newargs = new object[] { _collection, args};
+					result = action[binder.Name].InvokeMember(binder.Name,System.Reflection.BindingFlags.InvokeMethod,null,dbaction,newargs);
+					return true;
+				}
+
+				result = null;
+				return false;
+			}
+			catch(Exception ex)
+			{
+				throw ex;
+			}
 	    }
 	}
 

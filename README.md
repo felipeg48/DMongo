@@ -46,15 +46,23 @@ There is a Test case based on the example above.
 2. Data Types (work in progress). Note: For now only annonymous types are accepted.
 3. DB Actions - Update, Insert, Delete (work in progress)
 4. DB Query - all Finders and Linq (not done)
-5. Extra functionallity from the CSharp Driver (not done)
+5. Same fuctionality from CSharp Driver (work in progress)
 6. Multithread - (not done)
+7. Reduced Maps - (not done)
 7. More and more...
-
 
 ### Notes:
 
 This project is being develop on Mono for Mac using the CSharpDriver Libraries, NUnit and Mono implementation of the C# language.
 I haven't tested it yet on a windows environment, but this inital commit should work.
 I used the .NET Framework 4.0
+
+### Commits:
+
+* 08-16-2012: Added a Invoke for Generic Methods, so the CSharp Driver functionality is in place. Example: 
+	
+	```csharp
+	var result = db.test.FindOneAs<BsonDocument>(query);
+	```
 
 [My Blog](http://felipeg48.blogspot.com)

@@ -123,6 +123,28 @@ namespace DMongo.Driver
 			throw new NotImplementedException("Only annonymous types are accepted for Queries.");
 		}
 
+		public dynamic findOne(MongoCollection collection,object[] args)
+		{
+			Type type = args[0].GetType();
+
+			if(type.Name.Contains("<>__AnonType")){
+
+				PropertyInfo[] properties = type.GetProperties();
+				Dictionary<string,object> dictionary = new Dictionary<string, object>();
+				foreach(var property in properties)
+					dictionary[property.Name] = property.GetValue(args[0],null);
+
+				var query = new QueryDocument(dictionary);
+				var result = collection.FindOneAs<BsonDocument>(query); 
+
+				if(null!=result)
+					return new Entity(result);
+
+				return null;
+			}
+			throw new NotImplementedException("Only annonymous types are accepted for Queries.");
+		}
+
 		public void insert(MongoCollection collection, object[] args)
 		{
 			collection.Insert(args[0]);				
@@ -140,10 +162,14 @@ namespace DMongo.Driver
 				if(document[property].IsString)
 					value = document[property].AsString;
 				else if(document[property].IsBoolean)
-					value = document.IsBoolean;
+					value = document[property].AsBoolean;
+				else if (document[property].IsBsonDateTime)
+					value = document[property].AsDateTime;
+				else if (document[property].IsObjectId)
+					value = document[property].AsObjectId.ToString();
 				else if (document[property].IsBsonNull)
 					value = null;
-				else
+				else 
 					value = null;
 
 				properties.Add(property,value);

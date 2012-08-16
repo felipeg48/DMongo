@@ -53,9 +53,17 @@ There is a Test case based on the example above.
 
 ### Notes:
 
-This project is being develop on Mono for Mac using the CSharpDriver Libraries, NUnit and Mono implementation of the C# language.
-I haven't tested it yet on a windows environment, but this inital commit should work.
-I used the .NET Framework 4.0
+* This project is being develop on Mono for Mac using the CSharpDriver Libraries, NUnit and Mono implementation of the C# language.
+* I haven't tested it yet on a windows environment, but this inital commit should work.
+* I used the .NET Framework 4.0
+* All results are based on BsonDocument unless a entity is specified.
+
+### TODO:
+
+* Cleanup the dynamic finds
+* Get more detail from the InvokeMemberBinder for a better implementation on the bypass functionality
+* More Test Cases
+
 
 ### Commits:
 

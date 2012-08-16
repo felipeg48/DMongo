@@ -60,9 +60,15 @@ namespace DMongo.Test
 			//Step. Define Query
 			dynamic query = new { name = "felipe" };
 
+			//Step. find
 			var result = db.test.find(query);
 			Assert.AreEqual(1,result.Count);
 			Assert.AreEqual(query.name,result[0].name);
+
+			//Step. findOne
+			var resultOne = db.test.findOne(query);
+			Assert.IsNotNull(resultOne);
+			Assert.AreEqual(query.name,resultOne.name);
 		}
 
 		[Test]
